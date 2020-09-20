@@ -1,0 +1,38 @@
+input, button {
+    font-family: inherit;
+    outline: none;
+    border-style: dashed;
+    display: block;
+    border-radius: 10px;
+    transition: all 0.4s;
+}
+
+#submit:hover {
+    border-color: #28a745;
+    background-color: #28a745;
+    color: white;
+    transition: all 0.4s;
+    border-radius: 35px;
+}
+
+textarea {
+    outline: none;
+    min-height: 150px;
+    border-style: dashed;
+    transition: border-color 0.4s;
+    border-radius: 20px;
+    padding: 15px;
+}
+
+input:not(:focus):hover, textarea:not(:focus):hover {
+    cursor: pointer;
+}
+
+input:not([type="submit"]):focus, textarea:focus {
+    cursor: text;
+}
+
+input:hover, input:not([type="submit"]):focus, textarea:hover, textarea:focus {
+    transition: border-color 0.4s;
+    border-color: #007bff;
+}

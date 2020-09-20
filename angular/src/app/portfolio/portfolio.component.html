@@ -1,0 +1,47 @@
+<app-nav></app-nav>
+<div id="main" class="container my-5">
+    <h1>Portfolio</h1>
+    <!-- for every category, generate -->
+    <section *ngFor="let category of categories">
+        <h4 class="mt-5 ml-3">{{ category.name }}</h4>
+        <div class="row no-gutters my-3">
+            <!-- for every project in that category, generate -->
+            <div *ngFor="let project of category.projects" [id]="project.name" (click)="showModal(project.name, category.name);" class="col-7 col-lg-3 col-md-5 col-sm-5 text-center mx-auto my-3 boxed-image round">
+                <div [style.backgroundImage]="'linear-gradient(35deg, ' + project.color1 + ', ' + project.color2 + ' 100%)'" class="d-flex justify-content-center position-absolute w-100 p-1 round-top">
+                    <p class="text-white m-0 align-self-center">{{ project.name }}</p>
+                </div>
+                <div>
+                    <img [src]="project.image_location" [alt]="project.name" class="project-logo img-fluid round">
+                </div>
+                <div class="d-flex justify-content-center position-absolute w-100 p-1 project-bottom">
+                    <p class="text-dark m-0 align-self-center"><small *ngFor="let tag of project.tags; index as i">
+                        <strong *ngIf="i == 0 || i == 1" class="mx-1 p-1">
+                            <span>
+                            {{ tag.name }}
+                            </span>
+                        </strong>
+                    </small></p>
+                </div>
+            </div>
+        </div>
+        <div class="container my-5">
+            <div class="divider my-4 mx-auto"></div>
+        </div>
+    </section>
+</div>
+<div class="project-modal-lg">
+    <div class="text-white">
+        <div class="close-button d-none d-md-block d-lg-block m-0 p-0 text-center" (click)="hideModal();"></div>
+        <div class="close-button close-button-mobile d-lg-none d-md-none m-0 p-0 text-center" (click)="hideModal();"></div>
+        <div class="container row mx-auto justify-content-center">
+            <div *ngIf="selectedProject" class="my-5 col-lg-10 col-md-10 col-sm-12">
+                <h1 *ngIf="!selectedProject.link">{{ selectedProject.name }}</h1>
+                <a *ngIf="selectedProject.link" href="{{selectedProject.link}}"><h1>{{ selectedProject.name }}</h1></a>
+                <div class="row">
+                    <span *ngFor="let tag of selectedProject.tags" class="tags mx-1 my-1 px-2 py-1">{{ tag.name }}</span>
+                </div>
+                <div class="my-3" [innerHTML]="selectedProject.description"></div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,10 @@
+body * {
+    font-family: 'Montserrat', 'sans-serif';
+}
+
+.divider {
+    border-width: 3px !important;
+    width: 80%;
+    height: 4px;
+    background: -webkit-linear-gradient(-135deg,#5d9bff 20%,#353c47 50%,  #f99441 100%);
+}

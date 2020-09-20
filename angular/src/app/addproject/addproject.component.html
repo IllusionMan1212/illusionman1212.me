@@ -1,0 +1,21 @@
+<app-nav></app-nav>
+<div class="containter my-5">
+    <div class="row text-center justify-content-center">
+        <form class="col-lg-8 col-md-10 col-12 row" (submit)="addProject();">
+            <input type="text" class="w-100 my-3 p-2 text-center" autocomplete="off" maxlength="64" placeholder="Name" name="project_name" [(ngModel)]="project.name">
+            <input type="text" class="w-100 my-3 p-2 text-center" autocomplete="off" maxlength="256" placeholder="Link" name="project_link" [(ngModel)]="project.link"> 
+            <select class="w-100 my-3 p-2 text-center" maxlength="64" name="category" [(ngModel)]="project.category">
+                <option>Software</option>
+                <option>Web Development</option>
+                <option>Other</option>
+            </select>
+            <input type="color" class="w-50 my-3 p-2 text-center" autocomplete="off" maxlength="64" placeholder="Color 1" name="color1" [(ngModel)]="project.color1">
+            <input type="color" class="w-50 my-3 p-2 text-center" autocomplete="off" maxlength="64" placeholder="Color 2" name="color2" [(ngModel)]="project.color2">
+            <input id="image" class="w-100 my-3 p-2 text-center" autocomplete="off" maxlength="64"type="file" placeholder="Image Location" name="image" (change)="onChange($event)">
+            <input class="w-100 my-3 p-2 text-center" autocomplete="off" maxlength="64"type="text" placeholder="Tags" name="tags" [(ngModel)]="project.tags">
+            <textarea class="w-100 my-3 p-2 text-center" autocomplete="off" placeholder="Description" name="desc" [(ngModel)]="project.description"></textarea>
+            <input class="w-100 my-3 p-2 text-center" autocomplete="off" placeholder="Password" name="password" [(ngModel)]="project.password">
+            <input type="submit" value="Add Project">
+        </form>
+    </div>
+</div>

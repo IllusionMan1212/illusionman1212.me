@@ -1,0 +1,10 @@
+p {
+    line-height: 2;
+}
+
+.text-orange {
+    color: rgb(255, 145, 0);
+}
+.text-orange:hover {
+    color: rgb(255, 115, 0);
+}
