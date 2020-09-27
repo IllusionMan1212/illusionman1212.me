@@ -5,6 +5,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const fileUpload = require('express-fileupload');
+const compression = require('compression');
 require("./mvc/models/db");
 
 const indexRouter = require('./mvc/routes/index');
@@ -16,6 +17,7 @@ app.set('views', path.join(__dirname, 'mvc', 'views'));
 app.set('view engine', 'ejs');
 
 app.use(fileUpload());
+app.use(compression());
 
 app.use(logger('dev'));
 app.use(express.json());
