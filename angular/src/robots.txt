@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /admin/addproject
+Disallow: /getportfolio
+Sitemap: https://illusionman1212.me/sitemap.xml

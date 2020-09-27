@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { NavigationEnd, Router, ActivatedRoute } from '@angular/router';
+import { SEOService } from '../seo.service';
+import { filter, map, mergeMap, tap } from 'rxjs/operators';
 
 @Component({
     selector: 'app-contact',
@@ -9,9 +11,25 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class ContactComponent implements OnInit {
 
-    constructor(private api: ApiService, private http: HttpClient) { }
+    constructor(private api: ApiService, private router: Router, private seo: SEOService, private activatedRoute: ActivatedRoute) {
+        this.router.events.pipe(
+            filter((event) => event instanceof NavigationEnd),
+            map(e => this.activatedRoute),
+            map((route) => {
+                while (route.firstChild) route = route.firstChild;
+                return route;
+            }),
+            filter((route) => route.outlet === "primary"),
+            mergeMap((route) => route.data),
+        ).subscribe((event) => {
+            console.log(event['title']);
+            this.seo.updateTitle(event['title']);
+            this.seo.updateOgUrl(event['ogUrl']);
+            this.seo.updateDescription(event['description']);
+        });
+    }
 
-    ngOnInit(): void { }
+    ngOnInit(): void {}
 
     public formError = "";
     public formSuccess = "";
