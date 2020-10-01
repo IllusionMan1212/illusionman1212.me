@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const fileUpload = require('express-fileupload');
 const compression = require('compression');
+const vhost = require("vhost");
 require("./mvc/models/db");
 
 const indexRouter = require('./mvc/routes/index');
@@ -25,6 +26,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "angular", "build")));
 
+const parentApp = express();
+parentApp.use(vhost(`api.${process.env.DOMAIN}`, require(`${__dirname}/../kotAPI/app`)))
+.use(vhost(process.env.DOMAIN, app))
+
 app.disable("x-powered-by");
 
 app.use('/', (req, res, next) => {
@@ -38,4 +43,4 @@ app.get("*", function(req, res, next) {
     res.sendFile(path.join(__dirname, "angular", "build", "index.html"));
 });
 
-module.exports = app;
+module.exports = parentApp;

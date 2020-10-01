@@ -23,9 +23,8 @@ app.set('port', port);
  */
 
 var options = {
-  key: fs.readFileSync("./ssl/key.pem"),
-  cert: fs.readFileSync("./ssl/illusionman1212_me.crt"),
-  ca: fs.readFileSync("./ssl/illusionman1212_me.ca-bundle")
+  key: fs.readFileSync("./ssl/privkey.pem"),
+  cert: fs.readFileSync("./ssl/fullchain.pem"),
 }
 
 var server = https.createServer(options, app)
