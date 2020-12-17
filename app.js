@@ -28,6 +28,7 @@ app.use(express.static(path.join(__dirname, "angular", "build")));
 
 const parentApp = express();
 parentApp.use(vhost(`api.${process.env.DOMAIN}`, require(`${__dirname}/../kotAPI/app`)))
+.use(vhost(`api.${process.env.DOMAIN}`, require(`${__dirname}/../say-cheese/app`)))
 .use(vhost(process.env.DOMAIN, app))
 
 app.disable("x-powered-by");
