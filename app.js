@@ -7,6 +7,7 @@ const logger = require('morgan');
 const fileUpload = require('express-fileupload');
 const compression = require('compression');
 const vhost = require("vhost");
+const ratelimiter = require("./mvc/routes/middleware/ratelimiter");
 require("./mvc/models/db");
 
 const indexRouter = require('./mvc/routes/index');
@@ -40,7 +41,7 @@ app.use('/', (req, res, next) => {
 
 app.use('/', indexRouter);
 
-app.get("*", function(req, res, next) {
+app.get("*", ratelimiter.getLimit, function(req, res, next) {
     res.sendFile(path.join(__dirname, "angular", "build", "index.html"));
 });
 

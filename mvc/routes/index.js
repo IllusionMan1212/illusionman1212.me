@@ -1,10 +1,11 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const indexCtrl = require('../controllers/index');
+const ratelimiter = require('./middleware/ratelimiter');
 
-router.post('/contact', indexCtrl.sendMessage);
-router.post('/admin/addproject', indexCtrl.addProject);
+router.post('/contact', ratelimiter.postLimit, indexCtrl.sendMessage);
+router.post('/admin/addproject', ratelimiter.postLimit, indexCtrl.addProject);
 
-router.get('/getportfolio', indexCtrl.getProjects);
+router.get('/getportfolio', ratelimiter.getLimit, indexCtrl.getProjects);
 
 module.exports = router;
