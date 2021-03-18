@@ -8,7 +8,6 @@ const express = require('express');
 var app = require('../app');
 var debug = require('debug')('illusionman1212.me:server');
 var http = require("http");
-var https = require("https");
 const fs = require('fs');
 
 /**
@@ -19,23 +18,10 @@ var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 /**
- * Create HTTPS server.
+ * Setup HTTP server
  */
 
-var options = {
-  key: fs.readFileSync("./ssl/privkey.pem"),
-  cert: fs.readFileSync("./ssl/fullchain.pem"),
-}
-
-var server = https.createServer(options, app)
-
-/**
- * Redirect all HTTP requests to HTTPS
- */
-
-var httpApp = express();
-httpApp.all('*', (req, res) => res.redirect(301, 'https://' + req.headers.host + req.url));
-http.createServer(httpApp).listen(80);
+var server = http.createServer(app)
 
 /**
  * Listen on provided port, on all network interfaces.
