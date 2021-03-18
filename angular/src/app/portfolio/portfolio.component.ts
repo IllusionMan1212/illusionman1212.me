@@ -41,6 +41,10 @@ export class PortfolioComponent implements OnInit {
                 this.categories = val.doc;
             }
         });
+        
+        document.addEventListener("keydown", (e: KeyboardEvent) => {
+            this.hideModal();
+        })
     }
 
     ngOnInit(): void { }
